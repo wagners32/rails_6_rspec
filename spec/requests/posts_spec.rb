@@ -73,7 +73,6 @@ RSpec.describe "/posts", type: :request do
     end
   end
   
-  
   describe "DELETE /destroy" do
     it "destroys the requested post" do
       post = Post.new(valid_attributes)

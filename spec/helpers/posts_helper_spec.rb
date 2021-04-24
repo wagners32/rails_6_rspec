@@ -1,15 +1,18 @@
 require 'rails_helper'
+include PostsHelper
 
-# Specs in this file have access to a helper object that includes
-# the PostsHelper. For example:
-#
-# describe PostsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe PostsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it 'assigns a user to a post' do
+    # arrange
+    creator = User.first_or_create!(email: 'raissa@gmail.com', password: 'cicasia', password_confirmation: 'cicasia')
+    @post = Post.new(title: 'Title', body: '12345', views: 1)
+    
+    # act
+    returned_post = assign_post_creator(@post, creator)
+
+    # assert
+    expect(returned_post.user).to  be(creator)
+  end
+  
 end
